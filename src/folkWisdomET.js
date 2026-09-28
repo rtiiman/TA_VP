@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 
-const textRef = path.join(__dirname, '..', 'vanasonad.txt');
+const textRef = path.join(__dirname, '..', 'pubic', 'txt', 'vanasonad.txt');
 
 //lõikab semikoolonite kohalt array'ks, tühjad osad jäetakse välja
 async function readFolkWisdom(referencedFile = textRef){
