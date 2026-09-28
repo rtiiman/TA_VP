@@ -16,6 +16,9 @@ app.set('view engine', 'ejs');
 //määran ühe päris kataloogi kättesaadavaks
 app.use(express.static('public'));
 
+//määran, et POST päringus saadetud andmed on kättesaadavad req.body kaudu
+app.use(bodyparser.urlencoded({ extended: false }));
+
 //marsruudid
 app.get('/', (req, res)=>{
 	//res.send('Express.js läks käima ja serveerib meile veebi');
@@ -41,12 +44,12 @@ app.get('/regvisit', (req, res)=>{
 
 app.post('/regvisit', async (req, res)=>{
 	try {
-		await fs.open(regTextRef, 'a');
-		await fs.appendFile(regTextRef. req.body.nameInput + ';');
+		await fs.appendFile(regTextRef, req.body.nameInput + ';');
 		res.render('regvisit');
-	}	
+	}
 	catch (err){
 		console.log(err);
+		res.render('regvisit');
 	}
 });
 
