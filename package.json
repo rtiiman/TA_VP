@@ -1,0 +1,29 @@
+{
+  "name": "ta_vp",
+  "version": "1.0.0",
+  "description": "Veebiprogrammeerimise kurusel loodud projekt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://rtiiman@github.com/rtiiman/TA_VP.git"
+  },
+  "keywords": [
+    "node.js",
+    "veeb",
+    "tlu",
+    "dti",
+    "veebiprogrammeerimine"
+  ],
+  "author": "Rasmus Tiiman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rtiiman/TA_VP/issues"
+  },
+  "homepage": "https://github.com/rtiiman/TA_VP#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
