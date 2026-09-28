@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const fs = require('fs').promises;
 const dateET = require('./src/dateAndTimeFormattedET.js');
 const folkWisdom = require('./src/folkWisdomET.js');
 
@@ -14,10 +15,19 @@ app.use(express.static('public'));
 //marsruudid
 app.get('/', (req, res)=>{
 	//res.send('Express.js läks käima ja serveerib meile veebi');
-	const dayNow = dateET.weekDay
-	const dateNow = dateET.fullDate
-	const timeNow = dateET.fullTime
+	const dayNow = dateET.weekDay();
+	const dateNow = dateET.fullDate();
+	const timeNow = dateET.fullTime();
 	res.render('index', {dayNow: dayNow, dateNow: dateNow, timeNow: timeNow});
-})
+});
+
+app.get('/vanasona', async (req, res)=>{
+	const randomWisdom = folkWisdom.randomWisdom();
+	try {
+		
+	} catch (err) {
+		
+	}
+});
 
 app.listen(5129);
