@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+	<meta charset="utf-8">
+	<title>Rasmus Tiiman - veebiprogrammeerimine</title>
+</head>
+<body>
+	<img src="/media/veebiprogrammeerimine_2026_TA.png" alt="">
+	<h1>Filmiga seotud ametid</h1>
+	<p>Siin lehel saab andmebaasi lisada filmiga seotud ameteid.</p>
+	<hr>
+	<ul>
+		<li><a href="/">Avalehele</a></li>
+		<li><a href="/eestifilm">Eesti filmi avaleht</a></li>
+	</ul>
+	<hr>
+	<form method="POST">
+		<label for="titleInput">Ameti nimetus</label>
+		<input id="titleInput" name="titleInput" type="text" placeholder="Nimetus ..." maxlength="50" value="<%= titleInput %>" required>
+		<br>
+		<label for="descriptionInput">Kirjeldus (kuni 1000 märki)</label>
+		<br>
+		<textarea id="descriptionInput" name="descriptionInput" rows="5" cols="60" placeholder="Ameti kirjeldus ..."><%= descriptionInput %></textarea>
+		<br>
+		<input id="professionSubmit" name="professionSubmit" type="submit" value="Salvesta">
+	</form>
+	<p><%= notice %></p>
+</body>
+</html>

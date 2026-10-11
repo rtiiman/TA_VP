@@ -41,4 +41,22 @@ function weekDayET(){
 	return weekDayNamesET[weekDay];
 }
 
-module.exports = {fullDate:dateFormattedET, fullTime:timeFormattedET, weekDay:weekDayET}
+//teeb vormi kuupäevasisendist (tekst kujul AAAA-KK-PP) ajaobjekti, mis vastab selle päeva keskööle kohaliku aja järgi
+//kui kuupäev puudub, on vales vormingus või seda pole olemas (näiteks 31. veebruar), tagastab vigase ajaobjekti, mille getTime() on NaN
+function dateFromInputET(dateText){
+	if(typeof dateText !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(dateText)){
+		return new Date(NaN);
+	}
+	const dateParts = dateText.split('-');
+	const year = Number(dateParts[0]);
+	const month = Number(dateParts[1]) - 1;
+	const day = Number(dateParts[2]);
+	const dateObject = new Date(year, month, day);
+	//olematu kuupäev nihkuks järgmisesse kuusse, seega kontrollin, et aasta, kuu ja päev jäid samaks
+	if(dateObject.getFullYear() !== year || dateObject.getMonth() !== month || dateObject.getDate() !== day){
+		return new Date(NaN);
+	}
+	return dateObject;
+}
+
+module.exports = {fullDate:dateFormattedET, fullTime:timeFormattedET, weekDay:weekDayET, fromInput:dateFromInputET}
