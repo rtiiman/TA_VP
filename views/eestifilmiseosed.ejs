@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+	<meta charset="utf-8">
+	<title>Rasmus Tiiman - veebiprogrammeerimine</title>
+</head>
+<body>
+	<img src="/media/veebiprogrammeerimine_2026_TA.png" alt="">
+	<h1>Isikute ja filmide seosed</h1>
+	<p>Siin lehel on näha, millistes Eesti filmides ja mis ametis on filmiinimesed osalenud.</p>
+	<hr>
+	<ul>
+		<li><a href="/">Avalehele</a></li>
+		<li><a href="/eestifilm">Eesti filmi avaleht</a></li>
+	</ul>
+	<hr>
+	<ol>
+		<% relationList.forEach(function(relation){%>
+		<li><%= relation.first_name %> <%= relation.last_name %>, <%= relation.movie_title %> (<%= relation.release_year %>), <%= relation.profession_title %><% if(relation.character_name){ %> (<%= relation.character_name %>)<% } %></li>
+		<% }); %>
+	</ol>
+</body>
+</html>
