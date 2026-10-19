@@ -49,4 +49,8 @@ app.use('/eestifilm', eestifilmRouter);
 const visitsRouter = require('./routes/visitsRoutes');
 app.use('/visits', visitsRouter);
 
+//galerii üleslaadimise marsruudid
+const galleryUploadRouter = require('./routes/galleryUploadRoutes');
+app.use('/galleryUpload', galleryUploadRouter);
+
 app.listen(5129);
