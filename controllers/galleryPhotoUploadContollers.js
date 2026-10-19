@@ -44,6 +44,11 @@ const galleryUploadUploadPost = async (req, res) => {
 		console.log(err);
 		res.render('galleryPhotoUpload');
 	}
+	finally {
+		if (connection){
+			await connection.end();
+		}
+	}
 };
 
 module.exports = {
