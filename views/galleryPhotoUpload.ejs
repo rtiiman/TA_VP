@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+	<meta charset="utf-8">
+	<title>Rasmus Tiiman - veebiprogrammeerimine</title>
+</head>
+<body>
+	<img src="/media/veebiprogrammeerimine_2026_TA.png" alt="">
+	<h1>Galeriisse fotode üleslaadimine</h1>
+	<p>Siin lehel saab fotosid galeriisse lisada.</p>
+	<hr>
+	<ul>
+		<li><a href="/">Avalehele</a></li>
+	</ul>
+	<hr>
+	<form method="POST" enctype="multipart/form-data">
+		<label for="photoInput">Valige foto</label>
+		<input type="file" id="photoInput" name="photoInput" accept="image/*" required>
+		<br>
+		<label for="altInput">Sisesta alt tekst</label>
+		<input id="altInput" name="altInput" type="text">
+		<br>
+		<label for="privacyInput1">Privaatne (ainult ise nähtav)</label>
+		<input id="privacyInput1" name="privacyInput" type="radio" value="0" checked>
+		<br>
+		<label for="privacyInput2">Sisseloginud kasutajatele nähtav</label>
+		<input id="privacyInput2" name="privacyInput" type="radio" value="1">
+		<br>
+		<label for="privacyInput3">Avalik (kõigile nähtav)</label>
+		<input id="privacyInput3" name="privacyInput" type="radio" value="2">
+		<br>
+		<input id="photoSubmit" type="submit" value="Lae üles">
+	</form>
+</body>
+</html>

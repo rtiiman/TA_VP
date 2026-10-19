@@ -4,7 +4,7 @@ const router = express.Router();
 //kontrollerid
 const{
 	galleryPhotoUpload,
-	galleryUploadUploadPost} = require('../controllers/galleryUploadController');
+	galleryUploadUploadPost} = require('../controllers/galleryPhotoUploadContollers');
 
 router.route('/').get(galleryPhotoUpload);
 

@@ -8,7 +8,22 @@ const galleryPhotoUpload = (req, res) => {
 	res.render('galleryPhotoUpload');
 }
 
+//@desc gallery photo upload form submission
+//@route POST /galleryUpload
+//@access public
+
+const galleryUploadUploadPost = async (req, res) => {
+	try {
+		res.render('galleryPhotoUpload');
+	}
+	catch (err){
+		console.log(err);
+		res.render('galleryPhotoUpload');
+	}
+};
+
 module.exports = {
-	galleryPhotoUpload
+	galleryPhotoUpload,
+	galleryUploadUploadPost
 }
 
