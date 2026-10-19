@@ -33,7 +33,7 @@ const galleryUploadUploadPost = async (req, res) => {
 		let sqlReq = 'INSERT INTO galleryphoto (filename, origname, alttext, privacy, userid) VALUES (?, ?, ?, ?, ?)';
 		const userId = 1; //ajutine kuni tehakse kasutajakontod
 		// db connection
-		connection = await mysql.createConnection({host: process.env.DB_HOST, user: process.env.DB_USER, database: process.env.DB_NAME, password: process.env.DB_PASSWORD});
+		connection = await mysql.createConnection({host: process.env.DB_HOST, user: process.env.DB_USER, database: process.env.DB_NAME, password: process.env.DB_PASS});
 		const [result] = await connection.execute(sqlReq, [normalFileName, req.file.originalname, req.body.altInput, req.body.privacyInput, userId]);
 		console.log(result);
 		await connection.end();
