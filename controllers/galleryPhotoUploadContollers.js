@@ -16,6 +16,7 @@ const galleryPhotoUpload = (req, res) => {
 //@access public
 
 const galleryUploadUploadPost = async (req, res) => {
+	let connection;
 	try {
 		const baseName = 'vp' + Date.now();
 		const originalExt = path.extname(req.file.originalname).toLowerCase() || '.jpg';
@@ -28,6 +29,14 @@ const galleryUploadUploadPost = async (req, res) => {
 		// teeme pisipildi (100x100) thumbnails directorisse
 		await fs.mkdir('./public/gallery/thumbnails/', { recursive: true });
 		await sharp(req.file.destination + originalFileName).resize(100, 100, {fit: 'inside'}).jpeg({quality:90}).toFile('./public/gallery/thumbnails/' + normalFileName);
+		// db input
+		let sqlReq = 'INSERT INTO galleryphoto (filename, origname, alttext, privacy, userid) VALUES (?, ?, ?, ?, ?)';
+		const userId = 1; //ajutine kuni tehakse kasutajakontod
+		// db connection
+		connection = await mysql.createConnection({host: process.env.DB_HOST, user: process.env.DB_USER, database: process.env.DB_NAME, password: process.env.DB_PASSWORD});
+		const [result] = await connection.execute(sqlReq, [normalFileName, req.file.originalname, req.body.altInput, req.body.privacyInput, userId]);
+		console.log(result);
+		await connection.end();
 		res.render('galleryPhotoUpload');
 	
 	}
