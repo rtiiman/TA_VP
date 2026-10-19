@@ -4,8 +4,8 @@ const sharp = require('sharp');
 const path = require('path');
 
 //@desc home page for gallery photo uploading
-//@route GET /galleryPhotoUpload
-// access public
+//@route GET /galleryUpload
+//@access public
 
 const galleryPhotoUpload = (req, res) => {
 	res.render('galleryPhotoUpload');
@@ -22,13 +22,16 @@ const galleryUploadUploadPost = async (req, res) => {
 		const originalExt = path.extname(req.file.originalname).toLowerCase() || '.jpg';
 		const originalFileName = baseName + originalExt;
 		const normalFileName = baseName + '.jpg';
-		await fs.rename(req.file.path, req.file.destination + originalFileName);
+		const originalPath = path.join(req.file.destination, originalFileName);
+		const normalDir = path.join('public', 'gallery', 'normal');
+		const thumbDir = path.join('public', 'gallery', 'thumbnails');
+		await fs.rename(req.file.path, originalPath);
 		// suuruse muutmine
-		await fs.mkdir('./public/gallery/normal/', { recursive: true });
-		await sharp(req.file.destination + originalFileName).resize(800, 600, {fit: 'inside'}).jpeg({quality:90}).toFile('./public/gallery/normal/' + normalFileName);
+		await fs.mkdir(normalDir, { recursive: true });
+		await sharp(originalPath).resize(800, 600, {fit: 'inside', withoutEnlargement: true}).jpeg({quality:90}).toFile(path.join(normalDir, normalFileName));
 		// teeme pisipildi (100x100) thumbnails directorisse
-		await fs.mkdir('./public/gallery/thumbnails/', { recursive: true });
-		await sharp(req.file.destination + originalFileName).resize(100, 100, {fit: 'inside'}).jpeg({quality:90}).toFile('./public/gallery/thumbnails/' + normalFileName);
+		await fs.mkdir(thumbDir, { recursive: true });
+		await sharp(originalPath).resize(100, 100, {fit: 'cover'}).jpeg({quality:90}).toFile(path.join(thumbDir, normalFileName));
 		// db input
 		let sqlReq = 'INSERT INTO galleryphoto (filename, origname, alttext, privacy, userid) VALUES (?, ?, ?, ?, ?)';
 		const userId = 1; //ajutine kuni tehakse kasutajakontod
@@ -36,7 +39,6 @@ const galleryUploadUploadPost = async (req, res) => {
 		connection = await mysql.createConnection({host: process.env.DB_HOST, user: process.env.DB_USER, database: process.env.DB_NAME, password: process.env.DB_PASS});
 		const [result] = await connection.execute(sqlReq, [normalFileName, req.file.originalname, req.body.altInput, req.body.privacyInput, userId]);
 		console.log(result);
-		await connection.end();
 		res.render('galleryPhotoUpload');
 	
 	}
